@@ -9,25 +9,23 @@ module.exports = exports = function (directories, root) {
     root = root || __dirname;
 
     return function *(next) {
-        var path = this.path;
-        var isAsset = _.any(directories, function (dir) {
-            console.log(path + ' startsWith /' + dir + '?');
+        var path = this.path,
+            isAsset, fd;
+
+        isAsset = _.any(directories, function (dir) {
             return _.startsWith(path, '/' + dir);
         });
 
-        console.log('isAsset?', isAsset);
         try
         {
-            path = (isAsset && !fs.isDirectory(root + this.path))
+            path = (isAsset && !fs.lstatSync(root + this.path).isDirectory())
                 ? root + this.path
                 : root + this.path + 'index.html';
 
-            console.log(path);
-
-            var fd = fs.openSync(path, 'r');
+            fd = fs.openSync(path, 'r');
             yield send(this, path);
             fs.close(fd);
         }
-        catch(e) { console.log(e);/* 404 */ }
+        catch(e) { /* 404 */ }
     }
 };
