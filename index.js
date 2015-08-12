@@ -7,8 +7,9 @@ module.exports = exports = function (directories, root) {
     root = root || __dirname;
 
     return function *(next) {
+        var path = this.path;
         var isAsset = _.any(directories, function (dir) {
-            return _.startsWith(this.path, '/' + dir);
+            return _.startsWith(path, '/' + dir);
         });
 
         if (isAsset) {
