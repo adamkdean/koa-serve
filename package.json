@@ -1,6 +1,6 @@
 {
   "name": "koa-serve",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Koa middleware for serving static files",
   "main": "index.js",
   "repository": {
