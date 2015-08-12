@@ -26,6 +26,9 @@ module.exports = exports = function (directories, root) {
             yield send(this, path);
             fs.close(fd);
         }
-        catch(e) { /* 404 */ }
+        catch (e)
+        {
+            yield next;
+        }
     }
 };
