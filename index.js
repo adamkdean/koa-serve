@@ -2,9 +2,9 @@
 
 var _ = require('lodash');
 
-module.exports = exports = function (directories, rootDir) {
+module.exports = exports = function (directories, root) {
     if (!_.isArray(directories)) directories = [directories];
-    rootDir = rootDir || __dirname;
+    root = root || __dirname;
 
     return function *(next) {
         var isAsset = _.any(directories, function (dir) {
@@ -14,8 +14,8 @@ module.exports = exports = function (directories, rootDir) {
         if (isAsset) {
             try
             {
-                var fd = fs.openSync(config.path + this.path, 'r');
-                yield send(this, rootDir + this.path);
+                var fd = fs.openSync(root + this.path, 'r');
+                yield send(this, root + this.path);
                 fs.close(fd);
             }
             catch(e)
