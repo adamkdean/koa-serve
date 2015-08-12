@@ -1,2 +1,2 @@
-# koa-static
-Static middleware for Koa
+# koa-serve
+Koa middleware for serving static files

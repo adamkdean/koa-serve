@@ -1,0 +1,23 @@
+{
+  "name": "koa-serve",
+  "version": "0.0.1",
+  "description": "Koa middleware for serving static files",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamkdean/koa-serve"
+  },
+  "keywords": [
+    "koa",
+    "static"
+  ],
+  "author": "Adam K Dean <adamkdean@googlemail.com> (http://www.adamkdean.co.uk/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamkdean/koa-serve/issues"
+  },
+  "homepage": "https://github.com/adamkdean/koa-serve",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  }
+}
