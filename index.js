@@ -29,7 +29,8 @@ module.exports = exports = function (directories, root) {
         }
         catch (e)
         {
-            yield next;
+            this.body = 'Not Found';
+            this.status = 404;
         }
     }
 };
