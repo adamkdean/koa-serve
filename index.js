@@ -29,8 +29,12 @@ module.exports = exports = function (directories, root) {
         }
         catch (e)
         {
-            this.body = 'Not Found';
-            this.status = 404;
+            if (isAsset) {
+                this.body = 'Not Found';
+                this.status = 404;
+            } else {
+                yield next;
+            }
         }
     }
 };
