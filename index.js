@@ -7,7 +7,7 @@ var _ = require('lodash'),
 
 module.exports = exports = function (directories, root) {
     if (!_.isArray(directories)) directories = [directories];
-    root = root || path.join(__dirname, '..', '..');
+    root = path.normalize(root) || path.join(__dirname, '..', '..');
 
     return function *(next) {
         var reqPath = this.path,
