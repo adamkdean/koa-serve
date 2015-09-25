@@ -19,18 +19,19 @@ module.exports = exports = function (directories, root) {
             return _.startsWith(reqPath, '/' + dir);
         });
 
-        debug('requesting', reqPath);
+        if (!isAsset) return yield next;
+
+        debug('requested:', reqPath);
         this.path = root + this.path;
-        try
-        {
+        try {
             filePath = (isAsset && !fs.lstatSync(this.path).isDirectory())
                 ? this.path
                 : this.path + 'index.html';
 
+            debug('served:', filePath);
             yield send(this, filePath);
         }
-        catch (e)
-        {
+        catch (e) {
             debug(e);
             if (isAsset) {
                 this.body = 'Not Found';
