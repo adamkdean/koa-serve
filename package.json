@@ -20,6 +20,7 @@
   "homepage": "https://github.com/adamkdean/koa-serve",
   "dependencies": {
     "lodash": "^3.10.1",
+    "debug": "^2.2.0",
     "koa-send": "^1.3.1"
   }
 }
