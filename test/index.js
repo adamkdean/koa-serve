@@ -1,4 +1,5 @@
-var assert = require('mocha');
+var assert = require('chai').assert;
+var expect = require('chai').expect;
 var request = require('supertest');
 var serve = require('..');
 var koa = require('koa');
@@ -68,5 +69,10 @@ describe('serve()', function() {
     .get('/hello')
     .expect(200)
     .expect('world', done);
+  });
+
+  it('should throw an error when directory is not passed', function(done) {
+    expect(serve).to.throw(Error, /Directory argument not specified/);
+    done();
   });
 });

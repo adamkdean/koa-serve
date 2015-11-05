@@ -7,6 +7,10 @@ var _ = require('lodash'),
     debug = require('debug')('koa-serve');
 
 module.exports = exports = function (directories, root) {
+    if (directories === undefined) {
+      throw new Error('Directory argument not specified');
+    }
+
     if (!_.isArray(directories)) directories = [directories];
     root = root || path.join(__dirname, '..', '..');
     root = path.normalize(root);
