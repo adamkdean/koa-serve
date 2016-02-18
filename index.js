@@ -27,7 +27,7 @@ module.exports = exports = function (directories, root) {
         try {
             filePath = (isAsset && !fs.lstatSync(root + this.path).isDirectory())
                 ? root + this.path
-                : root + this.path + 'index.html';
+                : path.join(root,this.path,'index.html');
 
             debug('served:', filePath);
             yield send(this, filePath);

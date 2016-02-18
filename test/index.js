@@ -45,6 +45,15 @@ describe('serve()', function() {
     .expect('index\n', done);
   });
 
+  it('should return index.html when requesting a directory without a slash-ending', function(done) {
+    app.use(serve('fixtures', __dirname));
+
+    request(app.listen())
+    .get('/fixtures')
+    .expect(200)
+    .expect('index\n', done);
+  });
+
   it('should yield the control when not GET', function(done) {
     app.use(serve('fixtures', __dirname));
 
