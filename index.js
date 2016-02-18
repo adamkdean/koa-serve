@@ -4,9 +4,11 @@ var _ = require('lodash'),
     fs = require('fs'),
     path = require('path'),
     send = require('koa-send'),
-    debug = require('debug')('koa-serve');
+    debug = require('debug')('koa-serve'),
+    assert = require('assert');
 
 module.exports = exports = function (directories, root) {
+    assert(directories,"Directory argument not specified");
     if (!_.isArray(directories)) directories = [directories];
     root = root || path.join(__dirname, '..', '..');
     root = path.normalize(root);
@@ -23,10 +25,12 @@ module.exports = exports = function (directories, root) {
 
         debug('requested:', reqPath);
         try {
-            filePath = (isAsset && !fs.lstatSync(root + this.path).isDirectory())
+            var isDir = fs.lstatSync(root + this.path).isDirectory();
+            filePath = (isAsset && !isDir)
                 ? root + this.path
-                : root + this.path + 'index.html';
-
+                : path.join(root,this.path,'index.html');
+            if(isAsset && isDir && this.path !== '/' && !/\/$/.test(this.path))
+                this.redirect(root + this.path + '/');
             debug('served:', filePath);
             yield send(this, filePath);
         }
