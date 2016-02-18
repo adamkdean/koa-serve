@@ -50,7 +50,7 @@ describe('serve()', function() {
 
     request(app.listen())
     .get('/fixtures')
-    .expect(200)
+    .expect(302)
     .expect('index\n', done);
   });
 

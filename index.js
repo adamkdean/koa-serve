@@ -25,10 +25,12 @@ module.exports = exports = function (directories, root) {
 
         debug('requested:', reqPath);
         try {
-            filePath = (isAsset && !fs.lstatSync(root + this.path).isDirectory())
+            var isDir = fs.lstatSync(root + this.path).isDirectory();
+            filePath = (isAsset && !isDir)
                 ? root + this.path
                 : path.join(root,this.path,'index.html');
-
+            if(isAsset && isDir && this.path !== '/' && !/\/$/.test(this.path))
+                this.redirect(root + this.path + '/');
             debug('served:', filePath);
             yield send(this, filePath);
         }
