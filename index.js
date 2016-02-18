@@ -4,9 +4,11 @@ var _ = require('lodash'),
     fs = require('fs'),
     path = require('path'),
     send = require('koa-send'),
-    debug = require('debug')('koa-serve');
+    debug = require('debug')('koa-serve'),
+    assert = require('assert');
 
 module.exports = exports = function (directories, root) {
+    assert(directories,"Directory argument not specified");
     if (!_.isArray(directories)) directories = [directories];
     root = root || path.join(__dirname, '..', '..');
     root = path.normalize(root);
